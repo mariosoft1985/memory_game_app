@@ -217,23 +217,25 @@ class _HomePageState extends State<HomePage> {
             SizedBox(
               height: 20,
             ),
-            GridView(
-              shrinkWrap: true,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 4,
-                crossAxisSpacing: 1,
+            Expanded(
+                          child: GridView(
+                shrinkWrap: true,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 4,
+                  crossAxisSpacing: 1,
+                ),
+                children: List.generate(visiblePairs.length, (index) {
+                  return Tile(
+                    imageAssetsPath: visiblePairs[index].getImageAssetPath(),
+                    isSelected: visiblePairs[index].getIsSelected(),
+                    parent: this,
+                    tileIndex: index,
+                    onUpdate: () {
+                      update(index);
+                    },
+                  );
+                }),
               ),
-              children: List.generate(visiblePairs.length, (index) {
-                return Tile(
-                  imageAssetsPath: visiblePairs[index].getImageAssetPath(),
-                  isSelected: visiblePairs[index].getIsSelected(),
-                  parent: this,
-                  tileIndex: index,
-                  onUpdate: () {
-                    update(index);
-                  },
-                );
-              }),
             ),
             // CircularProgressIndicator(
             //   value:0.5,
